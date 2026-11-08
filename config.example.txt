@@ -1,0 +1,19 @@
+[settings]
+hours_back = 48
+output_file = output/whop_chat.md
+user_agent = Mozilla/5.0
+include_prompt = true
+copy_clipboard = true
+selected_channels = all
+request_delay = 1
+max_pages = 1000
+
+[cookie]
+value =
+
+[channels]
+Channel One = chat_feed_REPLACE_1
+Channel Two = chat_feed_REPLACE_2
+
+[prompt]
+text =

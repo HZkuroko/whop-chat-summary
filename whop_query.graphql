@@ -1,0 +1,177 @@
+query chatFetchMessages($feedId: ID!, $feedType: FeedTypes!, $limit: Int, $before: BigInt, $after: BigInt, $direction: Direction, $pinned: Boolean, $includeReactions: Boolean, $includeDeleted: Boolean) {
+  messages: feedPosts(
+    feedId: $feedId
+    feedType: $feedType
+    limit: $limit
+    before: $before
+    after: $after
+    direction: $direction
+    pinned: $pinned
+    includeReactions: $includeReactions
+    includeDeleted: $includeDeleted
+  ) {
+    posts {
+      ...DmsPostFragment
+    }
+    users {
+      ...BasicUserProfileDetails
+    }
+    reactions {
+      ...ReactionFragment
+    }
+  }
+}
+fragment Attachment on AttachmentInterface {
+  __typename
+  id
+  signedId
+  analyzed
+  byteSizeV2
+  filename
+  contentType
+  source(variant: original) {
+    url
+  }
+  ... on ImageAttachment {
+    height
+    width
+    blurhash
+    aspectRatio
+  }
+  ... on VideoAttachment {
+    height
+    width
+    duration
+    aspectRatio
+    preview(variant: original) {
+      url
+    }
+  }
+  ... on AudioAttachment {
+    duration
+    waveformUrl
+  }
+}
+fragment BasicUserProfileDetails on PublicProfileUser {
+  id
+  name
+  createdAt
+  profilePicture {
+    sourceUrl
+  }
+  username
+  roles
+  lastSeenAt
+  blockedAt
+  isPlatformPolice
+  companyUserProfile {
+    id
+    company {
+      id
+    }
+    name
+    profilePicture {
+      sourceUrl
+    }
+  }
+}
+fragment DmsPostFragment on DmsPost {
+  __typename
+  id
+  createdAt
+  updatedAt
+  isDeleted
+  sortKey
+  isPosterAdmin
+  mentionedUserIds
+  content
+  richContent
+  markdownContent
+  feedId
+  feedType
+  attachments {
+    ...Attachment
+  }
+  gifs {
+    height
+    provider
+    originalUrl
+    previewUrl
+    slug
+    title
+    width
+  }
+  isEdited
+  isEveryoneMentioned
+  isPinned
+  linkEmbeds {
+    description
+    favicon
+    image
+    processing
+    title
+    url
+    footer {
+      title
+      description
+      icon
+    }
+  }
+  userId
+  viewCount
+  reactionCounts {
+    reactionType
+    userCount
+    value
+  }
+  messageType
+  embed
+  replyingToPostId
+  replyingToPost {
+    id
+    content
+    gifs {
+      __typename
+    }
+    isDeleted
+    messageType
+    attachments {
+      contentType
+    }
+    user {
+      id
+      name
+      username
+      roles
+      profilePicture {
+        sourceUrl
+      }
+    }
+  }
+  poll {
+    options {
+      id
+      text
+    }
+  }
+  customAuthor {
+    displayName
+    profilePicture {
+      sourceUrl
+    }
+  }
+}
+fragment ReactionFragment on Reaction {
+  id
+  isDeleted
+  createdAt
+  updatedAt
+  feedId
+  feedType
+  postId
+  postType
+  userId
+  reactionType
+  score
+  value
+}
