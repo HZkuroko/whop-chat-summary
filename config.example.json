@@ -1,9 +1,0 @@
-{
-  "hours_back": 24,
-  "user_agent": "PASTE_YOUR_BROWSER_USER_AGENT_HERE",
-  "output_file": "whop_last24h.md",
-  "channels": [
-    { "name": "Channel A", "feed_id": "chat_feed_xxxxxxxxxxxxxxxxxxxx" },
-    { "name": "Channel B", "feed_id": "chat_feed_yyyyyyyyyyyyyyyyyyyy" }
-  ]
-}
